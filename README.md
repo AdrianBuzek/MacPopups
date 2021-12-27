@@ -20,4 +20,4 @@ This code will produce something like this:
 
 <img width="372" alt="Bildschirmfoto 2021-12-27 um 19 29 40" src="https://user-images.githubusercontent.com/96743662/147498159-30359130-f459-4aa7-8836-92293b298b80.png">
 
-Note that I am on Mac Os Monterey (12.0) and haven't testet the classes on other versions of Mac Os.
+Note that I am on Mac Os Monterey (12.0) and haven't tested the classes on other versions of Mac Os.
