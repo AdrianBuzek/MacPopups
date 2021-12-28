@@ -2,7 +2,7 @@ from AppKit import NSAlert, NSInformationalAlertStyle, \
     NSApp, NSCriticalAlertStyle, \
     NSWarningAlertStyle, NSHelpManager, NSObject, NSColor, NSSound, NSURL, NSControl, NSOnState, NSOffState, NSImage,NSMakeSize,\
     NSGraphicsContext,NSImageInterpolationHigh,NSRectFromCGRect,NSBezierPath,NSEvenOddWindingRule,NSZeroPoint,NSMakeRect,\
-    NSCompositeSourceOver,NSOpenPanel
+    NSCompositeSourceOver,NSOpenPanel,NSUserDefaults,NSDistributedNotificationCenter,NSSavePanel,NSArray
 from UniformTypeIdentifiers import UTType
 from Quartz.CoreGraphics import CGRectMake
 
