@@ -62,6 +62,10 @@ class Button:
         self.title = btn.title()
 
     def set_color(self, rgb: tuple[float, float, float] = None, **kwargs):
+        """
+        Change the color of the button to a specific rgb or hex value.
+        Note that you are only able to change the color of default buttons. 
+        """
         if kwargs.get("hex"):
             color = Color(hex=kwargs.get("hex"))
         else:
