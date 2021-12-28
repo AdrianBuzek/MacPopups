@@ -14,7 +14,7 @@ def rounded_corners(image):
     existing_image = image
     existing_size = existing_image.size()
     new_size = NSMakeSize(existing_size.width,existing_size.height)
-    composed_image = NSImage.alloc().initWithSize_(new_size).autorelease()
+    composed_image = NSImage.alloc().initWithSize_(new_size)
     composed_image.lockFocus()
     NSGraphicsContext.currentContext().setImageInterpolation_(NSImageInterpolationHigh)
     image_frame = NSRectFromCGRect(CGRectMake(0, 0,existing_size.width,existing_size.height))
