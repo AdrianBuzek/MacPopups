@@ -63,9 +63,10 @@ class Button:
 
     def set_color(self, rgb: tuple[float, float, float] = None, **kwargs):
         if kwargs.get("hex"):
-            self.__btn.setBezelColor_(Color(hex=kwargs.get("hex")))
-            return
-        self.__btn.setBezelColor_(Color(rgba=tuple(val/255 for val in rgb)+(1,)))
+            color = Color(hex=kwargs.get("hex"))
+        else:
+            color = Color(rgba=tuple(val/255 for val in rgb)+(1,))
+        self.__btn.setBezelColor_(color)
 
     def set_sound(self, path: str):
         sound = NSSound.alloc()
@@ -126,14 +127,16 @@ class Alert:
 
 
 class OpenDialog:
-    def __init__(self,files=True,directories=False,multiple_selection=False,**kwargs):
-        self.__dialog = NSOpenPanel.alloc().init()
-
-        self.__dialog.setCanDownloadUbiquitousContents_(True)
+    def __init__(self,title="Open",files=True,directories=False,multiple_selection=False,**kwargs):
+        self.__dialog = NSOpenPanel.openPanel()
+        self.set_title(title)
         self.can_chose_files(files)
+
         self.can_chose_directories(directories)
+
         self.multiple_selection(multiple_selection)
         extensions = kwargs.get("extensions")
+
         if extensions:
             self.file_extensions(extensions)
     def can_chose_files(self,t:bool=True):
@@ -148,8 +151,36 @@ class OpenDialog:
     def file_extensions(self,extensions:list[str]):
         types = [UTType.exportedTypeWithIdentifier_(ext) for ext in extensions]
         self.__dialog.setAllowedContentTypes_(types)
-
+    def set_title(self,title):
+        self.__dialog.setTitle_(title)
     def show(self):
         self.__dialog.runModal()
         return list(self.__dialog.URLs())
+    
+    
+class SaveDialog:
+    def __init__(self,title="Save",message=None,**kwargs):
+        self.__dialog = NSSavePanel.savePanel()
+        if kwargs.get("can_create_dirs"):
+            self.can_create_directories(kwargs.get("can_create_dirs"))
+        self.__dialog.setShowsTagField_(False)
+        #self.__dialog.setBackgroundColor_(Color(hex="#000000"))
+        self.set_title(title)
+        self.set_message(message)
 
+        extensions = kwargs.get("extensions")
+        if extensions:
+            self.file_extensions(extensions)
+    def can_create_directories(self,t):
+        self.__dialog.setCanCreateDirectories_(t)
+
+    def file_extensions(self, extensions: list[str]):
+        """Error"""
+    def set_title(self,title):
+        self.__dialog.setTitle_(title)
+
+    def set_message(self,message):
+        self.__dialog.setMessage_(message)
+    def show(self):
+        self.__dialog.runModal()
+        return self.__dialog.URL()
